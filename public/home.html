@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Community Spaces</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f4f4f4;
+            padding: 20px;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .club {
+            width: 90%;
+            max-width: 300px;
+            margin: 15px;
+            background: #fff;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            position: relative;
+        }
+
+        .club img {
+            width: 100%;
+            height: auto;
+            object-fit: cover;
+        }
+
+        .club-content {
+            padding: 20px;
+            text-align: center;
+        }
+
+        .club-title {
+            font-size: 20px;
+            margin-bottom: 10px;
+        }
+
+        .club-description {
+            font-size: 14px;
+            line-height: 1.5;
+            margin-bottom: 15px;
+        }
+
+        .button {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            font-size: 14px;
+        }
+
+        .coming-soon {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: #ff5722;
+            color: #fff;
+            padding: 5px 10px;
+            border-radius: 5px;
+            font-size: 12px;
+        }
+
+        @media (min-width: 601px) {
+            body {
+                justify-content: space-around;
+            }
+
+            .club {
+                width: calc(50% - 30px);
+                /* Adjust width for medium screens */
+            }
+        }
+
+        @media (min-width: 1025px) {
+            .club {
+                width: calc(25% - 30px);
+                /* Adjust width for large screens */
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+
+    <div class="club">
+        <img src="/images/rubik.png" alt="Rubik's Cube Club">
+        <div class="club-content">
+            <h2 class="club-title">Rubik's Cube</h2>
+            <p class="club-description">Join fellow cube enthusiasts and challenge yourself in Rubik's Cube
+                competitions. Solve puzzles to earn rewards and recognition within our community.</p>
+            <a href="{{link-1}}" class="button" target="_blank">Share</a>
+        </div>
+        <div class="coming-soon">NFT Minting ???</div>
+    </div>
+
+    <div class="club">
+        <img src="/images/main.png" alt="Frame Poll">
+        <div class="club-content">
+            <h2 class="club-title">Poll</h2>
+            <p class="club-description">Innovative frame tool that enables community members to
+                create and participate in on-frame polls seamlessly, without the need to navigate away. This capability
+                fosters vibrant discussions and robust community engagement, allowing members to share ideas, pose
+                questions, and tap into the collective wisdom directly within their current environment.</p>
+            <a href="{{link-2}}" class="button" target="_blank">Share</a>
+        </div>
+    </div>
+
+    <div class="club">
+        <img src="/images/tip.png" alt="Toshi Tip">
+        <div class="club-content">
+            <h2 class="club-title">The Toshi Tip</h2>
+            <p class="club-description">The Toshi Tip is a digital tipping tool that utilizes Toshi, a form of cryptocurrency, as its primary currency. Designed to foster a culture of appreciation and support within online communities, it allows users to send and receive tips instantly as a gesture of thanks, encouragement, or recognition for valuable contributions. Whether it's rewarding insightful comments, creative content, or helpful advice, The Toshi Tip streamlines the process of showing gratitude in a tangible way, enhancing engagement and positive interactions in the digital space. Coming soon!</p>
+        </div>
+        <div class="coming-soon">Coming Soon</div>
+    </div>
+
+    <div class="club">
+        <img src="/images/confessional.png" alt="The Confessional">
+        <div class="club-content">
+            <h2 class="club-title">The Confessional</h2>
+            <p class="club-description">The Confessional offers a secure space for anonymous confessions, both on-chain
+                and on-frame. It's designed for members to share and reflect in complete privacy. Coming soon!</p>
+        </div>
+        <div class="coming-soon">Coming Soon</div>
+    </div>
+
+    <div class="club">
+        <img src="/images/blackjack.png" alt="Blackjack Casino">
+        <div class="club-content">
+            <h2 class="club-title">Blackjack</h2>
+            <p class="club-description">on-chain Blackjack game, where you have the unique choice to play
+                as the house or join as a player. Experience the thrill and strategy from both perspectives. Coming
+                soon!</p>
+        </div>
+        <div class="coming-soon">Coming Soon</div>
+    </div>
+
+</body>
+
+</html>
