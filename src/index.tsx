@@ -14,11 +14,12 @@ app.use('/*', serveStatic({ root: './public' }))
 app.frame("/", (c)=>TipController(c,"/"))
 
 app.castAction('/tip', (c) => {
-  console.log(
-    `Cast Action to ${JSON.stringify(c.actionData.castId)} from ${
-      c.actionData.fid
-    }`,
-  )
+  console.log("action data",c.actionData.castId.fid);
+  // console.log(
+  //   `Cast Action to ${JSON.stringify(c.actionData.castId)} from ${
+  //     c.actionData.fid
+  //   }`,
+  // )
   return c.res({ message: 'Action Succeeded' })
 })
 

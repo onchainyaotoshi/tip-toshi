@@ -3,7 +3,7 @@ import { type TypedResponse } from "../../node_modules/frog/types/response.js";
 
 export default (c: FrameContext, a?: string): TypedResponse<FrameResponse> => c.res({
     action: a ? a : undefined,
-    image: `${process.env.FC_DOMAIN}/images/tip.png`,
+    image: `${process.env.FC_DOMAIN}/images/tip.png?v=1`,
     intents: [
         <Button.AddCastAction
         action="/tip"
@@ -12,5 +12,6 @@ export default (c: FrameContext, a?: string): TypedResponse<FrameResponse> => c.
       >
         Install
       </Button.AddCastAction>,
+      <Button value={"setup"} action={"/setup"}>Setup</Button>
     ],
 });
