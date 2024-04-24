@@ -1,7 +1,6 @@
 import { Frog, FrogConstructorParameters } from 'frog'
 import { neynar } from 'frog/hubs'
 import _ from 'lodash';
-import Nftoshis from 'nftoshis-gating';
 
 const frogAppArgs: FrogConstructorParameters = {
     imageOptions: {
@@ -15,5 +14,3 @@ frogAppArgs.hub = neynar({ apiKey: process.env.NEYNAR_API_KEY || '' });
 frogAppArgs.verify = false;
 
 export const getFrogApp = (opts: FrogConstructorParameters<{}> = {}) => new Frog(_.merge(frogAppArgs,opts));
-
-export const nftoshis = new Nftoshis();
