@@ -20,7 +20,11 @@
     "tsx": "^3.12.2"
   },
   "dependencies": {
+    "@hono/node-server": "^1.11.0",
+    "@neynar/nodejs-sdk": "^1.19.3",
     "frog": "^0.8.6",
+    "hono": "^4.2.7",
+    "knex": "^3.1.0",
     "lodash": "^4.17.21"
   }
 }

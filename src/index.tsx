@@ -7,11 +7,15 @@ import { isLive } from './utils/dev-tools'
 
 import TipController from './controllers/tip'
 
+// import {app as SetupRoute} from './routes/setup';
+
 export const app = getFrogApp();
 
 app.use('/*', serveStatic({ root: './public' }))
 
 app.frame("/", (c)=>TipController(c,"/"))
+
+// app.route('/setup',SetupRoute);
 
 app.castAction('/tip', (c) => {
   console.log("action data",c.actionData.castId.fid);

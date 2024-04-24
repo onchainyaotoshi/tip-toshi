@@ -7,11 +7,11 @@ export default (c: FrameContext, a?: string): TypedResponse<FrameResponse> => c.
     intents: [
         <Button.AddCastAction
         action="/tip"
-        name="Tip $Toshi"
+        name="Send a $2 PowerTip with $TOSHI"
         icon="gift"
       >
         Install
       </Button.AddCastAction>,
-      <Button value={"setup"} action={"/setup"}>Setup</Button>
+      // <Button value={"setup"} action={"/setup"}>Setup</Button>
     ],
 });
