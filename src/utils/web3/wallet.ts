@@ -110,7 +110,7 @@ export const tippingFeature = async(fromFid: number, toFid: number, amount: numb
   // @ts-ignore
   const addresses = res.result.user.verifiedAddresses.eth_addresses;
   if(addresses.length === 0){
-    throw new Error("User lacks verified addresses");
+    throw new Error("Caster has no verified address");
   }
 
   // console.log('address[0]: ',addresses[0]);

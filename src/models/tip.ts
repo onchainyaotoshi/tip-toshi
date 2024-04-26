@@ -1,6 +1,7 @@
 import db from '../utils/db';
 
 interface TipEntry {
+  id?: number; // Adding optional id for updates
   fromFid: number;
   toFid: number;
   username:string;
@@ -29,10 +30,20 @@ class TipModel {
    * @returns The ID of the inserted entry.
    */
   static async insert(entry: TipEntry): Promise<number> {
-    await db('tip').insert(entry);
-    return 1;
-    // const [id] = await db('tip').insert(entry).returning('id');
-    // return id;
+    const [id] = await db('tip').insert(entry).returning('id');
+    return id.id;  // Correct for PostgreSQL
+  }
+
+  /**
+   * Updates the transaction value for a given entry by ID.
+   * @param id The ID of the entry to update.
+   * @param tx The new transaction value.
+   * @returns Number of affected rows.
+   */
+  static async updateTxById(id: number, tx: string){
+    await db('tip')
+      .where({ id })
+      .update({ tx });
   }
 
   /**
