@@ -1,6 +1,7 @@
 import { Frog, FrogConstructorParameters } from 'frog'
 import { neynar as NeynarHub } from 'frog/hubs'
 import _ from 'lodash';
+import axios from 'axios';
 
 import { NeynarAPIClient } from "@neynar/nodejs-sdk";
 
@@ -18,3 +19,22 @@ frogAppArgs.verify = false;
 export const getFrogApp = (opts: FrogConstructorParameters<{}> = {}) => new Frog(_.merge(frogAppArgs,opts));
 
 export const neynar = new NeynarAPIClient(process.env.NEYNAR_API_KEY!);
+
+export const publishCast = async(text: string)=>{
+  const response = await axios.request({
+     method: 'POST',
+     url: 'https://api.neynar.com/v2/farcaster/cast',
+     headers: {
+       accept: 'application/json',
+       api_key: process.env.NEYNAR_API_KEY!,
+       'content-type': 'application/json'
+     },
+     data: {
+       signer_uuid: process.env.SIGNER_UUID!,
+       text: text,
+       channel_id: 'toshi'
+     }
+  })
+
+  // console.log('response:', response.data);
+}

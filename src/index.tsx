@@ -1,6 +1,6 @@
 import { serve } from "@hono/node-server";
 import { serveStatic } from "@hono/node-server/serve-static";
-import { getFrogApp, neynar } from "./utils/app";
+import { getFrogApp, neynar, publishCast } from "./utils/app";
 import TipController from "./controllers/tip";
 import AccountController from "./controllers/account";
 import TransactionController from "./controllers/transaction";
@@ -143,7 +143,7 @@ app.hono.post("/tip", async (c) => {
       username: username,
     });
 
-    console.log("id: ", id);
+    // console.log("id: ", id);
 
     // Execute tipping and insertion in the background
     process.nextTick(async () => {
@@ -151,6 +151,10 @@ app.hono.post("/tip", async (c) => {
         const tx = await tippingFeature(fromFid, toFid, amount);
 
         await TipModel.updateTxById(id, tx);
+
+        await publishCast(
+          `@${result.action.interactor.username} tipped ${amount} $toshi to @${username}`,
+        )
       } catch (err) {
         console.log("Background error:", err);
       }
