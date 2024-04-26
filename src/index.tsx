@@ -135,8 +135,13 @@ app.hono.post("/tip", async (c) => {
       });
 
       console.log('tip success');
-      
-      return c.json({ message: `Tip given.`}, 200);
+
+      let message = `Tip given: ${username}`;
+      if (message.length > 30) {
+        message = "Tip given!";
+      }
+
+      return c.json({ message });
     }catch(err){
       console.log('error2',err);
       return c.json({ message: err.message }, 401);
