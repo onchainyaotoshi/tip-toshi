@@ -153,7 +153,7 @@ app.hono.post("/tip", async (c) => {
         await TipModel.updateTxById(id, tx);
 
         await publishCast(
-          `@${result.action.interactor.username} tipped ${amount} $toshi to @${username}`,
+          `@${result.action.interactor.username} tipped ${amount} /toshi to @${username}`,
         )
       } catch (err) {
         console.log("Background error:", err);
