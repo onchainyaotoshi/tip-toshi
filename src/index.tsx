@@ -233,7 +233,7 @@ app.hono.post("/tip2", async (c) => {
       {
         embeds: [
           {
-            url: `https://tip-toshi-v2.replit.app/${toFid}`,
+            url: `https://tip-toshi-v2.replit.app`,
           },
         ],
         replyTo: result.action.cast.hash,
