@@ -3,6 +3,8 @@ import { type TypedResponse } from "../../node_modules/frog/types/response.js";
 
 const ADD_URL =
   `https://warpcast.com/~/add-cast-action?url=${process.env.FC_DOMAIN}/tip`;
+const ADD_URL2 =
+  `https://warpcast.com/~/add-cast-action?url=${process.env.FC_DOMAIN}/tip2`;
 
 export default (c: FrameContext, a?: string): TypedResponse<FrameResponse> => c.res({
     action: "/",
@@ -18,7 +20,8 @@ export default (c: FrameContext, a?: string): TypedResponse<FrameResponse> => c.
       //   Install
       // </Button.AddCastAction>,
 
-      <Button.Link href={ADD_URL}>Install</Button.Link>,
-      <Button value={"account"}>Account</Button>
+      <Button.Link href={ADD_URL}>Install V1</Button.Link>,
+      <Button value={"account"}>Account (V1)</Button>,
+      <Button.Link href={ADD_URL2}>Install V2</Button.Link>
     ],
 });

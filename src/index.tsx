@@ -5,6 +5,8 @@ import TipController from "./controllers/tip";
 import AccountController from "./controllers/account";
 import TransactionController from "./controllers/transaction";
 
+import TippitRoute from "./routes/tip";
+
 import {
   getBalanceOf,
   getAmountTip,
@@ -94,6 +96,24 @@ app.hono.get("/tip", async (c) => {
   });
 });
 
+app.hono.get("/tip2", async (c) => {
+  let name = "Tip 😺 ($TOSHI) V2";
+
+  if (process.env.FC_DOMAIN.includes("-dev")) {
+    name += "-dev";
+  }
+
+  return c.json({
+    name,
+    icon: "gift",
+    description: "Send tip with $TOSHI directly.",
+    aboutUrl: "https://poll.cool",
+    action: {
+      type: "post",
+    },
+  });
+});
+
 app.hono.post("/tip", async (c) => {
   const {
     trustedData: { messageBytes },
@@ -171,6 +191,69 @@ app.hono.post("/tip", async (c) => {
     return c.json({ message: err.message === undefined ? "error code: 818" : err.message }, 401);
   }
 });
+
+app.hono.post("/tip2", async (c) => {
+  const {
+    trustedData: { messageBytes },
+  } = await c.req.json();
+
+  const result = await neynar.validateFrameAction(messageBytes);
+  if (!result.valid) {
+    console.log("validate-frame-action failed");
+    return c.json({ message: "Unauthorized" }, 401);
+  }
+
+  const cast = await neynar.lookUpCastByHashOrWarpcastUrl(
+    result.action.cast.hash,
+    CastParamType.Hash,
+  );
+  const {
+    cast: {
+      author: { fid, username },
+    },
+  } = cast;
+
+  const fromFid = result.action.interactor.fid;
+  const toFid = fid;
+  // console.log('interactor fid: ', result.action.interactor.fid);
+  // console.log('cast fid: ', fid);
+  // console.log('cast username: ', username);
+  if (result.action.interactor.fid === fid) {
+    return c.json({ message: "Can't tip yourself!" }, 401);
+  }
+
+  try {
+    if (await TipModel.exists(fromFid, result.action.cast.hash)) {
+      return c.json({ message: `Double tips detected!` }, 401);
+    }
+
+    const reply = await neynar.publishCast(
+      process.env.SIGNER_UUID!,
+      `@${result.action.interactor.username} Tip the creator directly with your verified address or via the frame (no smart account wallet needed):`,
+      {
+        embeds: [
+          {
+            url: `https://tip-toshi-v2.replit.app/${toFid}`,
+          },
+        ],
+        replyTo: result.action.cast.hash,
+      },
+    );
+
+    let message = `wait for toshibot.`;
+
+    return c.json(
+      { message: message.length > 30 ? `Tip Success` : message },
+      200,
+    );
+  } catch (err) {
+    console.error("Unexpected error:", err);
+    return c.json({ message: err.message === undefined ? "error code: 818" : err.message }, 401);
+  }
+
+  
+});
+
 
 const port: number | undefined = process.env.PORT
   ? +process.env.PORT
