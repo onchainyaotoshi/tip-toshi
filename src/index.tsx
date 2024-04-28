@@ -5,8 +5,6 @@ import TipController from "./controllers/tip";
 import AccountController from "./controllers/account";
 import TransactionController from "./controllers/transaction";
 
-import TippitRoute from "./routes/tip";
-
 import {
   getBalanceOf,
   getAmountTip,
@@ -227,13 +225,21 @@ app.hono.post("/tip2", async (c) => {
       return c.json({ message: `Double tips detected!` }, 401);
     }
 
+    const res = await neynar.lookupUserByFid(toFid);
+    // @ts-ignore
+    const addresses = res.result.user.verifiedAddresses.eth_addresses;
+    if(addresses.length === 0){
+      throw new Error("Caster has no verified address");
+    }
+
     const reply = await neynar.publishCast(
       process.env.SIGNER_UUID!,
-      `@${result.action.interactor.username} Tip the creator directly with your verified address or via the frame (no smart account wallet needed):`,
+      // `@${result.action.interactor.username} Tip the creator directly with your verified address or via the frame (no smart account wallet needed):`,
+      `@${result.action.interactor.username}`,
       {
         embeds: [
           {
-            url: `https://tip-toshi-v2.replit.app`,
+            url: process.env.FC_DOMAIN.includes("-dev") ? `https://bc20ba6d-6759-4d3c-be4e-112ca86278a0-00-v4g1zcc6vx6u.sisko.replit.dev` : `https://tip-toshi-v2.replit.app`
           },
         ],
         replyTo: result.action.cast.hash,
