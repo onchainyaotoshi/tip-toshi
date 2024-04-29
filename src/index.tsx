@@ -235,7 +235,7 @@ app.hono.post("/tip2", async (c) => {
     const reply = await neynar.publishCast(
       process.env.SIGNER_UUID!,
       // `@${result.action.interactor.username} Tip the creator directly with your verified address or via the frame (no smart account wallet needed):`,
-      `@${result.action.interactor.username}`,
+      `@${result.action.interactor.username} tip @${username}`,
       {
         embeds: [
           {
